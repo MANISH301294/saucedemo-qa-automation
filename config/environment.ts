@@ -10,7 +10,10 @@ export const environment = {
   browser: process.env.BROWSER ?? 'chromium',
   headless: booleanValue(process.env.HEADLESS, true),
   slowMo: Number(process.env.SLOW_MO ?? 0),
-  defaultTimeout: Number(process.env.DEFAULT_TIMEOUT ?? 10_000),
+  actionTimeout: Number(process.env.ACTION_TIMEOUT ?? 10_000),
+  navigationTimeout: Number(process.env.NAVIGATION_TIMEOUT ?? 15_000),
+  assertionTimeout: Number(process.env.ASSERTION_TIMEOUT ?? 5_000),
+  stepTimeout: Number(process.env.STEP_TIMEOUT ?? 30_000),
   screenshotDir: process.env.SCREENSHOT_DIR ?? './screenshots',
   traceDir: process.env.TRACE_DIR ?? './traces',
   db: {

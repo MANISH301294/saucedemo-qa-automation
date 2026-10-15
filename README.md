@@ -18,7 +18,7 @@ Run only the tagged smoke scenario with `npm run test:smoke`. TypeScript type ch
 
 ## Configuration
 
-Copy `.env.example` to `.env`. `BASE_URL` selects the application, `BROWSER` accepts `chromium`, `firefox`, or `webkit`, `HEADLESS` controls visibility, `SLOW_MO` adds a configurable debugging delay, and `DEFAULT_TIMEOUT` sets the Playwright and Cucumber step timeout in milliseconds. `SCREENSHOT_DIR` controls failure screenshot output and `TRACE_DIR` controls failed-run trace output. Do not commit `.env` or real credentials.
+Copy `.env.example` to `.env`. `BASE_URL` selects the application, `BROWSER` accepts `chromium`, `firefox`, or `webkit`, and `HEADLESS` controls visibility. `SLOW_MO` adds a configurable debugging delay. `ACTION_TIMEOUT` sets the default locator/action timeout, `NAVIGATION_TIMEOUT` sets navigation waits, `ASSERTION_TIMEOUT` sets Playwright web assertion retries, and `STEP_TIMEOUT` sets the overall Cucumber step timeout; all timeout values are milliseconds. `SCREENSHOT_DIR` controls failure screenshot output and `TRACE_DIR` controls failed-run trace output. Do not commit `.env` or real credentials.
 
 `playwright.config.ts` is the central browser configuration. It defines the base URL, browser, headless mode, action/navigation/assertion timeouts, screenshot-on-failure, retain-trace-on-failure, and SauceDemo's `data-test` test-id attribute. Since scenarios run through Cucumber rather than Playwright Test, `support/hooks.ts` imports its shared `browserSettings` and applies those options to each scenario's browser context. Failed traces are attached to the Cucumber report and saved under `TRACE_DIR`; open one with `npx playwright show-trace traces/<trace-file>.zip`.
 
@@ -79,8 +79,12 @@ In a real suite, use a unique run/scenario key to isolate records, parameterize 
 2. **Waits:** Playwright's auto-waiting actions and retrying assertions synchronize on actual UI state with a finite timeout rather than fixed delays.
 3. **Locators:** stable test IDs and exact product-name scoping avoid positional selectors and fragile XPath chains; role/name locators are used for meaningful user-facing controls.
 4. **50+ scenarios:** split features by domain, keep step wording reusable, extract shared domain workflows, use tags for suites, isolate test data per scenario, keep hooks thin, and shard independent scenarios in CI. Avoid a universal page object with unrelated actions.
-5. **CI/CD:** install a pinned Node version, run `npm ci`, install the selected Playwright browser with OS dependencies, then run `npm test`. Publish Cucumber output and failure screenshots as artifacts; store any environment secrets in the CI secret manager. Parallelize only after data and environment isolation are in place.
-6. **Next improvements:** add a Cucumber HTML/JSON report pipeline and a CI workflow with browser matrix/sharding; add richer typed test-data builders and contract-level checks if the application exposes test APIs.
+5. **CI/CD:** `.github/workflows/ci.yml` runs on every push and pull request. It sets up Node, installs dependencies and Chromium, type-checks the project, runs Cucumber scenarios, and uploads failure screenshots and traces as artifacts. Secrets belong in GitHub Actions secrets, not in the repository.
+6. **Next improvements:** add a Cucumber HTML/JSON report pipeline, expand the existing CI workflow with browser matrix/sharding, and add richer typed test-data builders and contract-level checks if the application exposes test APIs.
+
+## GitHub Actions
+
+The workflow at `.github/workflows/ci.yml` runs on every push and pull request. It installs Node dependencies and Chromium, type-checks the TypeScript project, runs both Cucumber features, and uploads screenshots and traces if the job fails.
 
 ## Video requirement
 

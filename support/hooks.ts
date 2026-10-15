@@ -13,7 +13,7 @@ import { CheckoutPage } from '../pages/CheckoutPage';
 const browserTypes: Record<string, BrowserType> = { chromium, firefox, webkit };
 // SauceDemo uses data-test rather than Playwright's default data-testid attribute.
 selectors.setTestIdAttribute('data-test');
-setDefaultTimeout(browserSettings.timeout);
+setDefaultTimeout(browserSettings.stepTimeout);
 
 Before(async function (this: AutomationWorld, scenario) {
   console.info(`[${scenario.pickle.name}] Starting ${browserSettings.browserName} (headless=${browserSettings.headless})`);

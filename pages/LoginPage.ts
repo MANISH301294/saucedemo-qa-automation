@@ -1,4 +1,5 @@
-import { expect, type Page } from '@playwright/test';
+import type { Page } from '@playwright/test';
+import { expect } from '../support/assertions';
 
 export class LoginPage {
   constructor(private readonly page: Page) {}

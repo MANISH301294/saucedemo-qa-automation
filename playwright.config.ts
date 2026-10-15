@@ -6,9 +6,10 @@ export const browserSettings = {
   baseURL: environment.baseUrl,
   browserName: validateBrowser(),
   headless: environment.headless,
-  timeout: environment.defaultTimeout,
-  actionTimeout: environment.defaultTimeout,
-  navigationTimeout: environment.defaultTimeout,
+  stepTimeout: environment.stepTimeout,
+  actionTimeout: environment.actionTimeout,
+  navigationTimeout: environment.navigationTimeout,
+  assertionTimeout: environment.assertionTimeout,
   screenshot: 'only-on-failure' as const,
   trace: 'retain-on-failure' as const,
   screenshotDir: environment.screenshotDir,
@@ -18,8 +19,8 @@ export const browserSettings = {
 
 export default defineConfig({
   testDir: './tests',
-  timeout: browserSettings.timeout,
-  expect: { timeout: browserSettings.timeout },
+  timeout: browserSettings.stepTimeout,
+  expect: { timeout: browserSettings.assertionTimeout },
   use: {
     baseURL: browserSettings.baseURL,
     browserName: browserSettings.browserName,
