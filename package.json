@@ -1,0 +1,21 @@
+{
+  "name": "saucedemo-qa-automation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BDD UI automation framework for SauceDemo using Playwright and TypeScript",
+  "scripts": {
+    "test": "cucumber-js --require-module ts-node/register --require 'steps/**/*.ts' --require support/hooks.ts",
+    "test:smoke": "npm test -- --tags @smoke",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.0.0",
+    "@playwright/test": "^1.50.0",
+    "@types/node": "^22.0.0",
+    "@types/pg": "^8.23.1",
+    "dotenv": "^16.4.7",
+    "pg": "^8.13.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}
