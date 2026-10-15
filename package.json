@@ -4,9 +4,10 @@
   "private": true,
   "description": "BDD UI automation framework for SauceDemo using Playwright and TypeScript",
   "scripts": {
-    "test": "cucumber-js --require-module ts-node/register --require 'steps/**/*.ts' --require support/hooks.ts",
+    "test": "cucumber-js --require-module ts-node/register --require 'steps/**/*.ts' --require support/hooks.ts --format summary --format html:reports/cucumber-report.html --format json:reports/cucumber-report.json",
     "test:smoke": "npm test -- --tags @smoke",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "pretest": "node -e \"require('node:fs').mkdirSync('reports', { recursive: true })\""
   },
   "devDependencies": {
     "@cucumber/cucumber": "^11.0.0",

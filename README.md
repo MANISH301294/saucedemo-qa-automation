@@ -14,7 +14,7 @@ cp .env.example .env
 npm test
 ```
 
-Run only the tagged smoke scenario with `npm run test:smoke`. TypeScript type checking is available with `npm run typecheck`. Playwright browser binaries are installed separately from npm dependencies.
+Run only the tagged smoke scenario with `npm run test:smoke`. Every test run prints a summary and writes an HTML report to `reports/cucumber-report.html` plus a JSON report to `reports/cucumber-report.json`. TypeScript type checking is available with `npm run typecheck`. Playwright browser binaries are installed separately from npm dependencies.
 
 ## Configuration
 
@@ -79,12 +79,12 @@ In a real suite, use a unique run/scenario key to isolate records, parameterize 
 2. **Waits:** Playwright's auto-waiting actions and retrying assertions synchronize on actual UI state with a finite timeout rather than fixed delays.
 3. **Locators:** stable test IDs and exact product-name scoping avoid positional selectors and fragile XPath chains; role/name locators are used for meaningful user-facing controls.
 4. **50+ scenarios:** split features by domain, keep step wording reusable, extract shared domain workflows, use tags for suites, isolate test data per scenario, keep hooks thin, and shard independent scenarios in CI. Avoid a universal page object with unrelated actions.
-5. **CI/CD:** `.github/workflows/ci.yml` runs on every push and pull request. It sets up Node, installs dependencies and Chromium, type-checks the project, runs Cucumber scenarios, and uploads failure screenshots and traces as artifacts. Secrets belong in GitHub Actions secrets, not in the repository.
-6. **Next improvements:** add a Cucumber HTML/JSON report pipeline, expand the existing CI workflow with browser matrix/sharding, and add richer typed test-data builders and contract-level checks if the application exposes test APIs.
+5. **CI/CD:** `.github/workflows/ci.yml` runs on every push and pull request. It sets up Node, installs dependencies and Chromium, type-checks the project, runs Cucumber scenarios, uploads the HTML/JSON reports on every run, and includes screenshots/traces when available. Secrets belong in GitHub Actions secrets, not in the repository.
+6. **Next improvements:** expand the existing CI workflow with a browser matrix and sharding, add richer typed test-data builders, and add contract-level checks if the application exposes test APIs.
 
 ## GitHub Actions
 
-The workflow at `.github/workflows/ci.yml` runs on every push and pull request. It installs Node dependencies and Chromium, type-checks the TypeScript project, runs both Cucumber features, and uploads screenshots and traces if the job fails.
+The workflow at `.github/workflows/ci.yml` runs on every push and pull request. It installs Node dependencies and Chromium, type-checks the TypeScript project, runs both Cucumber features, and uploads the HTML/JSON reports as a downloadable artifact. It also includes screenshots and traces when those files exist.
 
 ## Video requirement
 
