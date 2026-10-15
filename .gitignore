@@ -9,3 +9,5 @@ traces/
 .env
 
 .DS_Store
+
+.idea/
