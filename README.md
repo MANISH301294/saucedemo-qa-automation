@@ -94,7 +94,3 @@ The take-home asks for a 5–8-minute walkthrough video covering architecture, B
 
 AI assistance was used to scaffold this framework, implement the initial page objects, steps, hooks, DB example, and draft this README from the take-home requirements. Review and adapt the code, run it in your environment, and be prepared to explain and modify every part during the technical discussion. No video or claim of a completed run was generated.
 
-## Before submission
-
-- Record and add the required 5–8-minute walkthrough video (or link) in the Video requirement section.
-- Run `npm ci`, `npx playwright install chromium`, and `npm test` on a machine where Chromium can launch. In this workspace, the TypeScript check passes, but the browser run is blocked by the host's Chromium process permissions, so a passing end-to-end run has not been confirmed here.
