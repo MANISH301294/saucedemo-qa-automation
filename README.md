@@ -86,10 +86,6 @@ In a real suite, use a unique run/scenario key to isolate records, parameterize 
 
 The workflow at `.github/workflows/ci.yml` runs on every push and pull request. It installs Node dependencies and Chromium, type-checks the TypeScript project, runs both Cucumber features, and uploads the HTML/JSON reports as a downloadable artifact. It also includes screenshots and traces when those files exist.
 
-## Video requirement
-
-The take-home asks for a 5–8-minute walkthrough video covering architecture, BDD flow, design tradeoffs, locators, utilities, and test execution. Record and add your own walkthrough link or file before submission; this project does not contain a fabricated recording.
-
 ## AI disclosure
 
 AI assistance was used to scaffold this framework, implement the initial page objects, steps, hooks, DB example, and draft this README from the take-home requirements. Review and adapt the code, run it in your environment, and be prepared to explain and modify every part during the technical discussion. No video or claim of a completed run was generated.
